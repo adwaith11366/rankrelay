@@ -1,10 +1,11 @@
 // Builds the demo client site (Shoestring Atlas, a fictional budget travel blog) into docs/
 // for GitHub Pages. Pages deliberately ship with real SEO and AEO defects so the agents have
 // something to find. The full defect list is in site-src/SEEDED-DEFECTS.md.
-import { mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { hero, thumb, washCalendar, fareCalendar, hostelChart, eatChart } from "./art.mjs";
+import { washCalendar, fareCalendar, hostelChart, eatChart, planeOverlay } from "./art.mjs";
+import { motionCss, motionJs, photo, photos, gallery } from "./motion.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const out = join(root, "docs");
@@ -133,51 +134,52 @@ function page({ title, desc, h1, body, schema, cover, fakeTitle, home }) {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${title}</title>
 ${desc ? `<meta name="description" content="${desc}">` : ""}
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3"><script>document.documentElement.classList.add("js")</script>
 ${schema ? `<script type="application/ld+json">${JSON.stringify(schema)}</script>` : ""}
 </head><body>
 <header class="top"><div class="top-in"><a class="brand" href="index.html"><img src="logo.svg" alt="">Shoestring Atlas</a>
 <nav><a href="index.html">Home</a><a href="about.html">About</a></nav></div></header>
-${home ? body : `${cover ? `<div class="art-head"><img src="${cover}" alt="${title} illustration"></div>` : ""}
+${home ? body : `${cover ? `<div class="art-head"><img src="${cover}" alt="${title}" data-parallax></div><div class="progress"><i></i></div>` : ""}
 <main class="${cover ? "article" : "plain"}">${h1 ? `<h1>${h1}</h1>` : ""}${fakeTitle ? `<div class="fake-title">${fakeTitle}</div>` : ""}${body}</main>`}
-<footer><div>Shoestring Atlas is a fictional travel blog built as a demo client for a course assignment.</div></footer>
-</body></html>`;
+<footer><div>Shoestring Atlas is a fictional travel blog built as a demo client for a course assignment. Photos from Unsplash.</div></footer>
+<script src="site.js?v=3" defer></script></body></html>`;
 }
 
-rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
-writeFileSync(join(out, "style.css"), css);
+writeFileSync(join(out, "style.css"), css + motionCss);
+writeFileSync(join(out, "site.js"), motionJs);
 writeFileSync(join(out, ".nojekyll"), "");
 writeFileSync(join(out, "assets-hostel.svg"), hostelChart());
 writeFileSync(join(out, "chart-wash.svg"), washCalendar());
 writeFileSync(join(out, "chart-fares.svg"), fareCalendar());
 writeFileSync(join(out, "chart-meals.svg"), eatChart());
-writeFileSync(join(out, "hero.svg"), hero());
+writeFileSync(join(out, "plane.svg"), planeOverlay());
 writeFileSync(join(out, "logo.svg"), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -50 100 100">${`<circle r="46" fill="#12343B"/><path d="M0 -32 L10 -8 L32 0 L10 8 L0 32 L-10 8 L-32 0 L-10 -8Z" fill="#F4A261"/>`}</svg>`);
-for (const [slug, [pal, icon]] of Object.entries(art)) writeFileSync(join(out, `art-${slug}.svg`), thumb(pal, icon));
 
 for (const a of articles) {
   const schema = a.slug === "how-to-pack-carry-on-only"
     ? { "@context": "https://schema.org", "@type": "Article", headline: a.title, author: { "@type": "Organization", name: "Shoestring Atlas" } }
     : null;
-  const chart = charts[a.slug] ? `<div class="chart"><img src="${charts[a.slug][0]}" alt="${charts[a.slug][1]}"></div>` : "";
+  const chart = charts[a.slug] ? `<div class="chart reveal"><img src="${charts[a.slug][0]}" alt="${charts[a.slug][1]}"></div>` : "";
   writeFileSync(join(out, `${a.slug}.html`), page({
     title: a.title, desc: a.desc, h1: a.noH1 ? "" : a.title, fakeTitle: a.noH1 ? a.title : "",
-    body: a.body + chart, schema, cover: `art-${a.slug}.svg`,
+    body: a.body + chart, schema, cover: photo(photos[a.slug], 1600),
   }));
 }
 
-const cards = articles.filter((a) => !a.orphan).map((a) => `<a class="card" href="${a.slug}.html"><img src="art-${a.slug}.svg" alt="" width="640" height="360"><span>${a.title}</span></a>`).join("\n");
+const cards = articles.filter((a) => !a.orphan).map((a) => `<a class="card reveal" href="${a.slug}.html"><div class="pic"><img src="${photo(photos[a.slug], 700)}" alt="" width="640" height="360" loading="lazy"></div><span>${a.title}</span></a>`).join("\n");
 const spend = [["Bed", 15, "#008F7E"], ["Food", 12, "#E8590C"], ["Transport", 8, "#2B6CB0"], ["Activities", 5, "#8E3B8A"]];
 writeFileSync(join(out, "index.html"), page({
   title: "Shoestring Atlas: budget travel guides",
   desc: "Budget travel guides on packing light, finding cheap flights, and eating and sleeping well for less.",
   home: true,
-  body: `<section class="hero"><img src="hero.svg" alt="" width="1600" height="620"><div class="hero-in"><h1>Budget travel guides</h1>
-<p>Practical guides for travelling far on very little money.</p><a class="btn" href="#guides">Start reading</a></div></section>
+  body: `<section class="hero"><img class="kb" src="${photo(photos.hero, 2000)}" alt="" width="1600" height="620"><div class="shade"></div><img class="plane" src="plane.svg" alt=""><div class="hero-in"><h1>Budget travel guides</h1>
+<p>Practical guides for travelling far on very little money.</p><a class="btn" href="#guides">Start reading</a></div><div class="cue"></div></section>
+<div class="stats reveal"><div><b data-count="5">5</b><span>guides to read</span></div><div><b data-count="14">14</b><span>days in one carry-on</span></div><div><b data-count="40" data-prefix="$">$40</b><span>example daily budget</span></div></div>
 <div class="wrap" id="guides"><h2 class="sec">Latest guides</h2><p class="lead">Packing, flights, beds and food.</p><div class="grid">${cards}</div></div>
-<div class="wrap" style="padding-top:0"><div class="budget"><h2 class="sec">Where forty dollars a day can go</h2>
-<div class="bar">${spend.map(([n, v, c]) => `<i title="${n}: $${v}" style="flex:${v};background:${c}"></i>`).join("")}</div>
+${gallery()}
+<div class="wrap" style="padding-top:56px"><div class="budget reveal"><h2 class="sec">Where forty dollars a day can go</h2>
+<div class="bar grow">${spend.map(([n, v, c]) => `<i title="${n}: $${v}" style="flex:${v};background:${c}"></i>`).join("")}</div>
 <div class="legend">${spend.map(([n, v, c]) => `<span><b style="background:${c}"></b>${n} $${v}</span>`).join("")}</div>
 <p class="note">Example budget for illustration, not survey data.</p></div></div>`,
 }));

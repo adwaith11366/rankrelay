@@ -114,3 +114,11 @@ export function fareCalendar() {
 <text x="24" y="32" font-size="19" font-weight="700" fill="${INK}">Midweek departures can cost less</text>
 <text x="24" y="54" font-size="13" fill="${MUTED}">Example fares for one month, not real prices. Darker means dearer.</text>${head}${cells}</svg>`;
 }
+
+// Transparent layer for the home hero: a plane flying a dashed route.
+export function planeOverlay() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 640" preserveAspectRatio="xMidYMid slice" width="1600" height="640">
+<path id="route" d="M-40 540 C340 300 760 90 1040 150 S1420 240 1660 40" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="4 14" stroke-linecap="round" opacity=".55"/>
+<path fill="#fff" d="M-22 2 L18 -9 C22 -10 25 -6 22 -4 L3 7 L-2 19 L-7 20 L-5 10 L-14 11 L-19 17 L-22 17 L-20 9 Z"><animateMotion dur="24s" repeatCount="indefinite" rotate="auto"><mpath href="#route"/></animateMotion></path>
+</svg>`;
+}

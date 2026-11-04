@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
-<defs><linearGradient id="g-dusk-list" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12343B"/><stop offset="1" stop-color="#2D6E7E"/></linearGradient></defs>
-<rect width="640" height="360" fill="url(#g-dusk-list)"/>
-<circle cx="500" cy="96" r="44" fill="#fff" opacity=".28"/>
-<path d="M0 244.8 C115.19999999999999 180,204.8 266.4,320 216 S524.8 165.6,640 230.4 V360 H0Z" fill="#F4A261"/><path d="M0 302.4 C140.8 244.8,268.8 331.2,396.8 280.8 S563.2 251.99999999999997,640 295.2 V360 H0Z" fill="#E76F51"/>
-<g transform="translate(320 176)"><circle r="82" fill="#E76F51" opacity=".5"/><g><rect x="-34" y="-44" width="68" height="88" rx="8" fill="#fff"/><g fill="#12343B" opacity=".55"><rect x="-20" y="-26" width="40" height="6" rx="3"/><rect x="-20" y="-8" width="40" height="6" rx="3"/><rect x="-20" y="10" width="26" height="6" rx="3"/></g></g></g>
-</svg>

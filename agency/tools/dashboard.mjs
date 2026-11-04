@@ -46,8 +46,10 @@ export function buildDashboard(runDir, sheetUrl) {
     ["100+ words", (p) => (p.wordCount || 0) >= 100],
   ];
   const name = (p) => p.url.replace(crawl.site, "") || "home";
-  const failed = live.reduce((n, p) => n + checks.filter(([, f]) => !f(p)).length, 0);
+  const applies = (p, c) => p.status === 200 || c === "Status 200";
+  const failed = live.reduce((n, p) => n + checks.filter(([c, f]) => applies(p, c) && !f(p)).length, 0);
   const grid = `<table class="heat"><caption>Each cell is one check on one page</caption><thead><tr><th>Page</th>${checks.map(([c]) => `<th>${c}</th>`).join("")}</tr></thead><tbody>${live.map((p) => `<tr><td class="pg">${name(p).replace(".html", "")}</td>${checks.map(([c, f]) => {
+    if (!applies(p, c)) return `<td title="${name(p)}: ${c} not applicable" class="na">n/a</td>`;
     const ok = f(p);
     return `<td title="${name(p)}: ${c} ${ok ? "pass" : "fail"}" class="${ok ? "pass" : "fail"}">${ok ? "pass" : "fail"}</td>`;
   }).join("")}</tr>`).join("")}</tbody></table>`;
@@ -86,7 +88,7 @@ export function buildDashboard(runDir, sheetUrl) {
 .key{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:#5B5680;margin-top:10px}.key b{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px}
 .scroll{overflow-x:auto}.heat{border-collapse:separate;border-spacing:3px;width:100%;font-size:13px}.heat caption{text-align:left;color:#5B5680;margin-bottom:8px}
 .heat th{font-size:12px;color:#5B5680;font-weight:700;padding:4px}.heat td{text-align:center;padding:8px 6px;border-radius:4px}
-.heat .pg{text-align:left;font-weight:700;white-space:nowrap}.pass{background:#DDF4EE;color:#0B5F4F}.fail{background:#FBD9DC;color:#9B1C2B;font-weight:700}
+.heat .pg{text-align:left;font-weight:700;white-space:nowrap}.na{background:#F0EEF9;color:#5B5680}.pass{background:#DDF4EE;color:#0B5F4F}.fail{background:#FBD9DC;color:#9B1C2B;font-weight:700}
 .agents{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.agent{display:block;padding:14px;border-radius:10px;background:#F6F4FF;color:inherit;text-decoration:none}.agent:hover{background:#ECE7FF}.agent b{display:block}.agent span{font-size:13px;color:#5B5680}
 pre{white-space:pre-wrap;font:14px/1.55 Arial,sans-serif;margin:0}
 </style></head><body>
