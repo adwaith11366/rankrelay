@@ -34,7 +34,7 @@ The agents use each kit's `ROLE.md` as their charter and record each run in the 
 
 Submission files are in [submission/](submission/SUBMISSION.md).
 
-Agents can write only inside their run folder under `outputs/`. Nothing is sent, posted or published by an agent; outreach stays as drafts.
+Agents get read, write, search and web search tools only, so they have no way to send or post anything. Their work orders tell them to write only inside their run folder under `outputs/`; that is an instruction, not a sandbox.
 
 ## Run it
 
