@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is travel insurance worth it for a cheap trip?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on what you can't afford to lose. A cheap trip can still carry a large medical risk, so medical cover is worth considering even when the flights were low-cost. Cancellation cover matters more as your nonrefundable bookings grow."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does my credit card cover travel insurance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Some cards do and some don't. Coverage depends on the card, the issuer and how you paid for the trip. Read your card's benefits guide or ask the issuer whether it covers medical costs, cancellation, or only delays and baggage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I buy travel insurance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Soon after you make your first nonrefundable payment. Some cancellation benefits depend on buying within a set period, so check your insurer's deadline before you wait."
+      }
+    }
+  ]
+}

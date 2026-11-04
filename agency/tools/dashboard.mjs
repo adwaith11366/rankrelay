@@ -26,7 +26,7 @@ export function buildDashboard(runDir, sheetUrl) {
   const total = Math.max(1, (t1 - t0) / 1000);
   const okCount = spans.filter((s) => s.status === "ok").length;
 
-  const stageColor = { 1: "#7A2BE0", 2: "#2563EB", 3: "#0E9F8E", 4: "#E0457B" };
+  const stageColor = { 1: "#7A2BE0", 2: "#0E9F8E", 3: "#E8590C", 4: "#2B6CB0" };
   const gantt = spans.map((s) => {
     const left = (((s.start - t0) / 1000) / total) * 100;
     const width = Math.max(1, (((s.end - s.start) / 1000) / total) * 100);
@@ -95,7 +95,7 @@ pre{white-space:pre-wrap;font:14px/1.55 Arial,sans-serif;margin:0}
 <div class="tiles"><div class="tile"><b>${okCount} of ${agents.length}</b><span>agents finished</span></div><div class="tile"><b>${live.length}</b><span>URLs crawled</span></div><div class="tile"><b>${failed}</b><span>failed checks found</span></div><div class="tile"><b>${Math.floor(total / 60)}m ${Math.round(total % 60)}s</b><span>agent run time</span></div></div>
 <div class="two"><div class="panel"><h2>Readiness scores</h2><p class="sub">Out of 100, computed from the crawl by fixed formulas</p><div class="gauges">${gauge("SEO", crawl.scores.seo, "#7A2BE0")}${gauge("AEO", crawl.scores.aeo, "#2563EB")}</div></div>
 <div class="panel"><h2>What holds the scores down</h2><p class="sub">Share of live pages passing each check</p>${bars}</div></div>
-<div class="panel"><h2>Agent timeline</h2><p class="sub">Start and finish of each agent, from the kits' run logs</p>${gantt}<div class="key"><span><b style="background:#7A2BE0"></b>Stage 1: parallel analysis</span><span><b style="background:#2563EB"></b>Stage 2: writing</span><span><b style="background:#0E9F8E"></b>Stage 3: campaign and outbound</span><span><b style="background:#E0457B"></b>Stage 4: Project Manager</span></div></div>
+<div class="panel"><h2>Agent timeline</h2><p class="sub">Start and finish of each agent, from the kits' run logs</p>${gantt}<div class="key"><span><b style="background:#7A2BE0"></b>Stage 1: parallel analysis</span><span><b style="background:#0E9F8E"></b>Stage 2: writing</span><span><b style="background:#E8590C"></b>Stage 3: campaign and outbound</span><span><b style="background:#2B6CB0"></b>Stage 4: Project Manager</span></div></div>
 <div class="panel"><h2>Page health</h2><p class="sub">Live results from the crawler</p><div class="scroll">${grid}</div></div>
 <div class="panel"><h2>Project Manager brief</h2><p class="sub">Written by the agent at the end of this run</p><pre>${esc(brief)}</pre></div>
 <div class="panel"><h2>Agent outputs</h2><p class="sub">Each card opens that agent's file on GitHub</p><div class="agents">${files}</div></div>

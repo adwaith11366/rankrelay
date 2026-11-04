@@ -40,9 +40,9 @@ nav a:hover{color:var(--accent)}
 .legend{display:flex;flex-wrap:wrap;gap:10px 26px;font:15px Arial,sans-serif}
 .legend b{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px}
 .note{font:13px Arial,sans-serif;color:var(--muted);margin:14px 0 0}
-.art-head{position:relative;height:300px;overflow:hidden;background:#12343B}
-.art-head img{width:100%;height:100%;object-fit:cover}
-main.article{max-width:740px;margin:-70px auto 0;background:#fff;position:relative;border-radius:18px;padding:38px 46px 46px;box-shadow:0 10px 30px rgba(18,52,59,.1)}
+.art-head{position:relative;height:360px;overflow:hidden;background:#12343B}
+.art-head img{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+main.article{max-width:740px;margin:-46px auto 0;background:#fff;position:relative;border-radius:18px;padding:38px 46px 46px;box-shadow:0 10px 30px rgba(18,52,59,.1)}
 main.plain{max-width:740px;margin:0 auto;padding:44px 24px}
 .article h1,.fake-title,.plain h1{font:800 38px/1.2 Arial,sans-serif;margin:0 0 18px}
 .article h2{font:800 25px/1.25 Arial,sans-serif;margin:32px 0 8px}

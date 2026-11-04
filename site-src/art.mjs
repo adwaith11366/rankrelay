@@ -54,7 +54,7 @@ export function hero() {
 <g fill="#fff">${Array.from({ length: 46 }, (_, i) => `<circle cx="${(i * 197) % 1600}" cy="${(i * 83) % 250}" r="${i % 3 ? 1.4 : 2.2}" opacity=".7"/>`).join("")}</g>
 <path d="M0 470 L180 360 L300 430 L470 300 L640 440 L820 340 L1010 450 L1230 330 L1430 440 L1600 370 V620 H0Z" fill="#1F4E5A"/>
 <path d="M0 520 C220 440 380 560 640 490 S1120 430 1600 520 V620 H0Z" fill="#12343B"/>
-<path id="route" d="M60 420 C340 150 760 110 1020 230 S1420 280 1560 110" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="4 14" stroke-linecap="round" opacity=".7"/>
+<path id="route" d="M60 420 C340 150 760 110 1020 230 S1420 280 1560 110" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="4 14" stroke-linecap="round" opacity=".4"/>
 <g fill="#fff"><path d="M-22 2 L18 -9 C22 -10 25 -6 22 -4 L3 7 L-2 19 L-7 20 L-5 10 L-14 11 L-19 17 L-22 17 L-20 9 Z"><animateMotion dur="26s" repeatCount="indefinite" rotate="auto"><mpath href="#route"/></animateMotion></path></g>
 </svg>`;
 }
