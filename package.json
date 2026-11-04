@@ -1,0 +1,13 @@
+{
+  "name": "rankrelay",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "demo": "node agency/run-all.mjs",
+    "dry-run": "node agency/run-all.mjs --dry-run",
+    "site": "node site-src/build.mjs",
+    "serve": "node agency/tools/serve.mjs",
+    "bridge:render": "node agency/bridge/render.mjs"
+  }
+}

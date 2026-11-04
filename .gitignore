@@ -1,0 +1,4 @@
+.env
+agency/bridge/Code.local.gs
+node_modules/
+*.log.txt

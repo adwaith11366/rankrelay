@@ -1,0 +1,8 @@
+:root{--ink:#1d2433;--muted:#5d6678;--accent:#d9480f;--bg:#fffdf9}
+*{box-sizing:border-box}body{margin:0;font:18px/1.65 Georgia,serif;color:var(--ink);background:var(--bg)}
+header,main,footer{max-width:720px;margin:0 auto;padding:20px}
+header a.brand{font:700 22px Arial,sans-serif;color:var(--accent);text-decoration:none}
+nav a{margin-right:16px;font:15px Arial,sans-serif;color:var(--ink)}
+h1,h2{font-family:Arial,sans-serif;line-height:1.25}
+.card{padding:14px 0;border-bottom:1px solid #eadfce}.card a{font:700 20px Arial,sans-serif;color:var(--ink)}
+footer{font:14px Arial,sans-serif;color:var(--muted)}

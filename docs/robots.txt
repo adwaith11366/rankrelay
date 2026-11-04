@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://adwaith11366.github.io/rankrelay/sitemap.xml

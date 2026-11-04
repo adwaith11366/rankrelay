@@ -1,0 +1,8 @@
+[
+  { "id": "R-101", "from": "reader-a@example.com", "subject": "Link broken on flights article", "body": "The travel insurance link in your cheap flights post gives a page not found error. I wanted to read it before booking tomorrow." },
+  { "id": "R-102", "from": "reader-b@example.com", "subject": "Visa page", "body": "Your visa page is one line. Do you have an actual guide for visa-free countries?" },
+  { "id": "R-103", "from": "reader-c@example.com", "subject": "Thank you", "body": "Used the carry-on list for Vietnam and saved on bag fees. Thanks!" },
+  { "id": "R-104", "from": "partner@example.com", "subject": "Guest post offer", "body": "We can place a guest post with casino links for $50. Reply if interested." },
+  { "id": "R-105", "from": "reader-d@example.com", "subject": "Wrong info?", "body": "You say guesthouses beat dorms for two people. Is that true in Western Europe too? Prices looked different to me." },
+  { "id": "R-106", "from": "reader-e@example.com", "subject": "Two versions of packing list?", "body": "I found two packing pages with the same title. Which one is current?" }
+]

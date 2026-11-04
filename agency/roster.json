@@ -1,0 +1,71 @@
+{
+  "agency": "RankRelay",
+  "type": "SEO + AEO agency",
+  "client": "Shoestring Atlas (fictional budget travel blog)",
+  "agents": [
+    {
+      "id": "lead-researcher",
+      "name": "Lead Researcher",
+      "kit": "seo-employee",
+      "routine": "seo-calendar-refill",
+      "stage": 1,
+      "task": "Map traveller questions to site pages and rank content gaps"
+    },
+    {
+      "id": "technical-auditor",
+      "name": "Technical Auditor",
+      "kit": "web-dev-employee",
+      "routine": "web-site-sweep",
+      "stage": 1,
+      "task": "Audit the live crawl for technical SEO defects and propose fixes"
+    },
+    {
+      "id": "performance-analyst",
+      "name": "Performance Analyst",
+      "kit": "gtm-engineer",
+      "routine": "gtm-scoreboard",
+      "stage": 1,
+      "task": "Score SEO and AEO readiness from crawl data and flag bottlenecks"
+    },
+    {
+      "id": "support-triage",
+      "name": "Support Triage",
+      "kit": "customer-satisfaction-employee",
+      "routine": "csat-inbox-sweep",
+      "stage": 1,
+      "task": "Triage the sample reader inbox and draft priority replies"
+    },
+    {
+      "id": "content-writer",
+      "name": "Content Writer",
+      "kit": "social-media-employee",
+      "routine": "soc-draft-queue",
+      "stage": 2,
+      "task": "Draft an answer-first article with FAQ schema from the research"
+    },
+    {
+      "id": "campaign-builder",
+      "name": "Campaign Builder",
+      "kit": "ad-manager-employee",
+      "routine": "ads-creative-studio",
+      "stage": 2,
+      "task": "Build a one-week content and promotion schedule from the research"
+    },
+    {
+      "id": "outbound-strategist",
+      "name": "Outbound Strategist",
+      "kit": "sales-employee",
+      "routine": "sales-prospect-sweep",
+      "stage": 2,
+      "task": "List link and citation targets and draft outreach for approval"
+    }
+  ],
+  "manager": {
+    "id": "project-manager",
+    "name": "Project Manager",
+    "kit": "chief-of-staff",
+    "routine": "cos-fleet-reconcile",
+    "stage": 3,
+    "task": "Audit all 7 agents, update the ledger and write the daily brief"
+  }
+}
