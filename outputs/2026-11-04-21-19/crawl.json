@@ -1,0 +1,141 @@
+{
+  "site": "https://adwaith11366.github.io/rankrelay/",
+  "crawledAt": "2026-11-04T21:19:27.511Z",
+  "robotsTxt": {
+    "status": 200
+  },
+  "sitemap": {
+    "status": 200,
+    "urlCount": 6
+  },
+  "llmsTxt": {
+    "status": 404
+  },
+  "pages": [
+    {
+      "url": "https://adwaith11366.github.io/rankrelay/",
+      "status": 200,
+      "title": "Shoestring Atlas: budget travel guides",
+      "description": "Budget travel guides on packing light, finding cheap flights, and eating and sleeping well for less.",
+      "h1Count": 1,
+      "h2": [],
+      "wordCount": 50,
+      "imagesMissingAlt": 0,
+      "schemaTypes": [],
+      "inboundLinks": 12,
+      "inSitemap": true
+    },
+    {
+      "url": "https://adwaith11366.github.io/rankrelay/about.html",
+      "status": 200,
+      "title": "About",
+      "description": "About Shoestring Atlas.",
+      "h1Count": 1,
+      "h2": [],
+      "wordCount": 10,
+      "imagesMissingAlt": 0,
+      "schemaTypes": [],
+      "inboundLinks": 6,
+      "inSitemap": true
+    },
+    {
+      "url": "https://adwaith11366.github.io/rankrelay/how-to-pack-carry-on-only.html",
+      "status": 200,
+      "title": "How to pack for two weeks in one carry-on bag",
+      "description": "A two-week packing list that fits one carry-on bag, with what to leave at home and how to do laundry on the road.",
+      "h1Count": 1,
+      "h2": [
+        "What goes in the bag",
+        "What stays at home",
+        "How do you do laundry while travelling?"
+      ],
+      "wordCount": 164,
+      "imagesMissingAlt": 0,
+      "schemaTypes": [
+        "Article"
+      ],
+      "inboundLinks": 1,
+      "inSitemap": true
+    },
+    {
+      "url": "https://adwaith11366.github.io/rankrelay/cheap-flights-timing.html",
+      "status": 200,
+      "title": "When to book cheap flights",
+      "description": "When to book flights for lower fares, how flexible dates help, and why the cheapest fare is not always the best one.",
+      "h1Count": 1,
+      "h2": [
+        "Search a whole month",
+        "Count the real price"
+      ],
+      "wordCount": 94,
+      "imagesMissingAlt": 0,
+      "schemaTypes": [],
+      "inboundLinks": 1,
+      "inSitemap": true
+    },
+    {
+      "url": "https://adwaith11366.github.io/rankrelay/hostel-vs-guesthouse.html",
+      "status": 200,
+      "title": "Hostel or guesthouse: which is cheaper for solo travellers?",
+      "description": "",
+      "h1Count": 1,
+      "h2": [
+        "When a hostel wins",
+        "When a guesthouse wins"
+      ],
+      "wordCount": 98,
+      "imagesMissingAlt": 1,
+      "schemaTypes": [],
+      "inboundLinks": 1,
+      "inSitemap": true
+    },
+    {
+      "url": "https://adwaith11366.github.io/rankrelay/eat-on-a-budget.html",
+      "status": 200,
+      "title": "Eat well on ten dollars a day",
+      "description": "How to eat well for ten dollars a day while travelling: markets, lunch menus and hostel kitchens.",
+      "h1Count": 0,
+      "h2": [
+        "Shop at markets",
+        "Use the hostel kitchen"
+      ],
+      "wordCount": 62,
+      "imagesMissingAlt": 0,
+      "schemaTypes": [],
+      "inboundLinks": 1,
+      "inSitemap": false
+    },
+    {
+      "url": "https://adwaith11366.github.io/rankrelay/visa-free-basics.html",
+      "status": 200,
+      "title": "Visa basics",
+      "description": "Visa basics.",
+      "h1Count": 1,
+      "h2": [],
+      "wordCount": 24,
+      "imagesMissingAlt": 0,
+      "schemaTypes": [],
+      "inboundLinks": 1,
+      "inSitemap": true
+    },
+    {
+      "url": "https://adwaith11366.github.io/rankrelay/travel-insurance-basics.html",
+      "status": 404,
+      "inboundLinks": 1,
+      "inSitemap": false
+    },
+    {
+      "url": "https://adwaith11366.github.io/rankrelay/packing-list-backpack.html",
+      "status": 200,
+      "title": "How to pack for two weeks in one carry-on bag",
+      "description": "A two-week packing list that fits one carry-on bag, with what to leave at home and how to do laundry on the road.",
+      "h1Count": 1,
+      "h2": [],
+      "wordCount": 44,
+      "imagesMissingAlt": 0,
+      "schemaTypes": [],
+      "inboundLinks": 0,
+      "inSitemap": false
+    }
+  ]
+}

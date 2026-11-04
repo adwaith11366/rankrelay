@@ -48,7 +48,7 @@
       "name": "Campaign Builder",
       "kit": "ad-manager-employee",
       "routine": "ads-creative-studio",
-      "stage": 2,
+      "stage": 3,
       "task": "Build a one-week content and promotion schedule from the research"
     },
     {
@@ -56,7 +56,7 @@
       "name": "Outbound Strategist",
       "kit": "sales-employee",
       "routine": "sales-prospect-sweep",
-      "stage": 2,
+      "stage": 3,
       "task": "List link and citation targets and draft outreach for approval"
     }
   ],
@@ -65,7 +65,7 @@
     "name": "Project Manager",
     "kit": "chief-of-staff",
     "routine": "cos-fleet-reconcile",
-    "stage": 3,
+    "stage": 4,
     "task": "Audit all 7 agents, update the ledger and write the daily brief"
   }
 }

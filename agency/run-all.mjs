@@ -8,11 +8,13 @@ import { ROOT, loadEnv } from "./env.mjs";
 import { crawl } from "./tools/crawl.mjs";
 import { orders } from "./prompts.mjs";
 import { post } from "./bridge/bridge.mjs";
+import { buildDashboard } from "./tools/dashboard.mjs";
 
 loadEnv();
 const args = new Set(process.argv.slice(2));
 const dryRun = args.has("--dry-run");
 const noEmail = args.has("--no-email");
+const noBridge = args.has("--no-bridge"); // rehearsal: real agents, nothing sent to Google
 const roster = JSON.parse(readFileSync(join(ROOT, "agency", "roster.json"), "utf8"));
 const siteUrl = process.env.SITE_URL || "http://localhost:4173";
 const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-");
@@ -27,6 +29,22 @@ const banner = (n, title, note) => {
   if (note) say(`${c.d}${note}${c.x}`);
 };
 
+// The Claude desktop app can place npm's global folder under its own package path on Windows,
+// so a plain "claude" isn't always on PATH. Set CLAUDE_BIN in .env to override this search.
+function claudeBin() {
+  if (process.env.CLAUDE_BIN) return `"${process.env.CLAUDE_BIN}"`;
+  if (process.platform !== "win32") return "claude";
+  const found = [join(process.env.APPDATA || "", "npm", "claude.cmd")];
+  const packages = join(process.env.LOCALAPPDATA || "", "Packages");
+  if (existsSync(packages)) {
+    for (const d of readdirSync(packages).filter((n) => n.startsWith("Claude_"))) {
+      found.push(join(packages, d, "LocalCache", "Roaming", "npm", "claude.cmd"));
+    }
+  }
+  const hit = found.find(existsSync);
+  return hit ? `"${hit}"` : "claude";
+}
+
 function runClaude(agent, prompt) {
   return new Promise((resolve) => {
     const start = new Date();
@@ -39,7 +57,7 @@ function runClaude(agent, prompt) {
     for (const k of Object.keys(env)) if (k.startsWith("CLAUDE_CODE_") || k === "CLAUDECODE") delete env[k];
     const argv = ["-p", "--output-format", "json", "--model", process.env.AGENT_MODEL || "sonnet",
       "--permission-mode", "acceptEdits", "--allowedTools", "Read,Write,Glob,Grep,WebSearch"];
-    const child = spawn("claude", argv, { cwd: ROOT, env, shell: process.platform === "win32", stdio: ["pipe", "pipe", "pipe"] });
+    const child = spawn(`${claudeBin()} ${argv.join(" ")}`, { cwd: ROOT, env, shell: true, stdio: ["pipe", "pipe", "pipe"] });
     let out = "", err = "";
     child.stdout.on("data", (d) => (out += d));
     child.stderr.on("data", (d) => (err += d));
@@ -113,12 +131,14 @@ if (live === 0) { say(`${c.r}Site unreachable. Stopping.${c.x}`); process.exit(1
 
 banner(2, "Stage 1 agents work in parallel", "Each one is a separate Claude Code run with its kit's ROLE.md as its charter");
 const stage1 = await runStage(roster.agents.filter((a) => a.stage === 1));
-banner(3, "Stage 2 agents build on stage 1 outputs");
+banner(3, "Content Writer drafts from the research");
 const stage2 = await runStage(roster.agents.filter((a) => a.stage === 2));
-const seven = [...stage1, ...stage2];
+banner(4, "Campaign and outbound agents build on the draft");
+const stage3 = await runStage(roster.agents.filter((a) => a.stage === 3));
+const seven = [...stage1, ...stage2, ...stage3];
 seven.forEach((r) => (r.logged = kitRunlog(r)));
 
-banner(4, "Project Manager audits all 7 agents", "Files, sizes and exit codes are checked by code, then the PM reads the work");
+banner(5, "Project Manager audits all 7 agents", "Files, sizes and exit codes are checked by code, then the PM reads the work");
 const audit = auditFiles(seven);
 audit.forEach((a) => say(`  ${a.verdict === "Success" ? c.g : c.r}${a.verdict.padEnd(8)}${c.x}${a.agent.padEnd(22)}${String(a.bytes).padStart(7)} bytes  runlog:${a.runlogWritten ? "yes" : "NO"}`));
 const [pm] = await runStage([roster.manager], audit);
@@ -126,7 +146,7 @@ pm.logged = kitRunlog(pm);
 const briefFile = join(outDir, "daily-brief.md");
 const brief = existsSync(briefFile) ? readFileSync(briefFile, "utf8") : "The Project Manager did not produce a brief on this run.";
 
-banner(5, "Files created this run");
+banner(6, "Files created this run");
 readdirSync(outDir).filter((f) => !f.endsWith(".log.txt")).forEach((f) => say(`  ${relDir}/${f} ${c.d}(${statSync(join(outDir, f)).size} bytes)${c.x}`));
 
 const now = () => new Date().toISOString();
@@ -136,9 +156,9 @@ const rows = [
 ];
 appendFileSync(join(ROOT, "outputs", "ledger.csv"), rows.map((r) => [r.timestamp, r.agent, r.task, r.status].map((v) => `"${v}"`).join(",")).join("\n") + "\n");
 
-banner(6, "Update the live Google Sheet ledger");
-if (dryRun) {
-  say(`${c.y}Dry run: ${rows.length} rows held back${c.x}`);
+banner(7, "Update the live Google Sheet ledger");
+if (dryRun || noBridge) {
+  say(`${c.y}Rehearsal: ${rows.length} rows held back${c.x}`);
 } else {
   const res = await post({ action: "log", rows });
   say(`${c.g}[DONE]${c.x} ${res.appended} rows appended`);
@@ -147,12 +167,25 @@ if (dryRun) {
   say(`${c.g}[DONE]${c.x} Daily brief stored in the Briefs tab`);
 }
 
-banner(7, "Send the status bulletin");
-if (dryRun || noEmail) {
+banner(8, "Send the status bulletin");
+if (dryRun || noBridge || noEmail) {
   say(`${c.y}Skipped here; the 8:00 AM Apps Script trigger sends it.${c.x}`);
 } else {
   const res = await post({ action: "email" });
   say(`${c.g}[DONE]${c.x} Sent "${res.subject}"`);
+}
+
+banner(9, "Publish the results dashboard");
+const dash = buildDashboard(stamp, process.env.SHEET_URL);
+say(`${c.g}[DONE]${c.x} SEO ${dash.seo}, AEO ${dash.aeo}, ${dash.failed} failed checks`);
+if (!dryRun && !noBridge) {
+  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8", shell: process.platform === "win32" });
+  git("add", "outputs", "docs", "employees");
+  git("commit", "-m", `Daily run ${stamp}`);
+  const pushed = git("push");
+  say(pushed.status === 0
+    ? `${c.g}[DONE]${c.x} Pushed to GitHub. Dashboard: ${siteUrl}/dashboard/ ${c.d}(Pages takes about a minute)${c.x}`
+    : `${c.y}Push skipped: ${pushed.stderr.trim().split("\n").pop()}${c.x}`);
 }
 
 const failures = rows.filter((r) => r.status !== "Success").length;

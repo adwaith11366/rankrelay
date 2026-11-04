@@ -43,6 +43,7 @@ export async function crawl(siteUrl, outDir, knownPaths = []) {
 
   const pages = new Map();
   const inbound = new Map();
+  const linkedFrom = new Map();
   const queue = [base];
   const seen = new Set(queue);
   while (queue.length) {
@@ -55,7 +56,11 @@ export async function crawl(siteUrl, outDir, knownPaths = []) {
         const target = new URL(href, url);
         if (target.origin !== origin) continue;
         const key = norm(target.href);
-        if (key !== norm(url)) inbound.set(key, (inbound.get(key) || 0) + 1);
+        if (key !== norm(url)) {
+          inbound.set(key, (inbound.get(key) || 0) + 1);
+          if (!linkedFrom.has(key)) linkedFrom.set(key, new Set());
+          linkedFrom.get(key).add(url);
+        }
         if (!seen.has(key)) { seen.add(key); queue.push(key); }
       }
       delete info.links;
@@ -77,11 +82,34 @@ export async function crawl(siteUrl, outDir, knownPaths = []) {
   const list = [...pages.values()].map((p) => ({
     ...p,
     inboundLinks: inbound.get(norm(p.url)) || 0,
+    linkedFrom: p.status === 200 ? undefined : [...(linkedFrom.get(norm(p.url)) || [])],
     inSitemap: sitemapSet.has(norm(p.url)),
   }));
 
+  // Fixed formulas, so a score only moves when the site moves. Each score is a plain average of shares.
+  const live = list.filter((p) => p.status === 200);
+  const pct = (n) => (100 * n) / (live.length || 1);
+  const shares = {
+    live: (100 * live.length) / (list.length || 1),
+    description: pct(live.filter((p) => p.description).length),
+    singleH1: pct(live.filter((p) => p.h1Count === 1).length),
+    sitemap: pct(live.filter((p) => p.inSitemap).length),
+    schema: pct(live.filter((p) => p.schemaTypes?.length).length),
+    h2: pct(live.filter((p) => p.h2?.length).length),
+    llms: llms.status === 200 ? 100 : 0,
+  };
+  const avg = (...v) => Math.round(v.reduce((a, b) => a + b, 0) / v.length);
+  const scores = {
+    seo: avg(shares.live, shares.description, shares.singleH1, shares.sitemap),
+    aeo: avg(shares.schema, shares.description, shares.h2, shares.llms),
+    seoFormula: "average of: pages returning 200, pages with a description, pages with one H1, pages in the sitemap",
+    aeoFormula: "average of: pages with schema, pages with a description, pages with H2 sections, llms.txt present",
+    shares,
+  };
+
   const result = {
     site: base,
+    scores,
     crawledAt: new Date().toISOString(),
     robotsTxt: { status: robots.status },
     sitemap: { status: sitemap.status, urlCount: sitemapUrls.length },

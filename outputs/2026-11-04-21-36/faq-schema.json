@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is travel insurance worth it if I'm only going for a week?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, if you have non-refundable bookings or aren't covered for medical care in that country. A short trip is as exposed to an accident or a cancelled flight as a long one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does travel insurance cover a cancelled flight?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sometimes. Policies cover cancellation only for reasons they list, and the airline may owe you a refund or rebooking first. Read the cancellation section and keep every message from the airline."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I buy travel insurance after I've left home?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Some insurers sell to travellers already abroad, but the terms are often narrower, and you usually can't claim for anything that started before you bought. Buy before you go."
+      }
+    }
+  ]
+}

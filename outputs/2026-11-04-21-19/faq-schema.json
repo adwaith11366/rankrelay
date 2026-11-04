@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I work out a daily budget for a trip?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Add four lines for your destination: accommodation, food, local transport and activities. Use current prices for each, add a buffer for surprises, and you have a daily budget."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I include flights in my daily budget?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Flights are a one-off cost. Keep them separate, work out your daily number on its own, and add the flight cost to the total trip budget."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How big should my buffer be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your experience. If you know the region and your costs are mostly fixed, a small buffer is enough. On a first trip, or somewhere you can't predict prices, leave a bigger one."
+      }
+    }
+  ]
+}
