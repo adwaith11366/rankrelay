@@ -179,13 +179,13 @@ banner(9, "Publish the results dashboard");
 const dash = buildDashboard(stamp, process.env.SHEET_URL);
 say(`${c.g}[DONE]${c.x} SEO ${dash.seo}, AEO ${dash.aeo}, ${dash.failed} failed checks`);
 if (!dryRun && !noBridge) {
-  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8", shell: process.platform === "win32" });
+  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8" });
   git("add", "outputs", "docs", "employees");
-  git("commit", "-m", `Daily run ${stamp}`);
-  const pushed = git("push");
+  const committed = git("commit", "-m", `Daily run ${stamp}`);
+  const pushed = committed.status === 0 ? git("push") : committed;
   say(pushed.status === 0
     ? `${c.g}[DONE]${c.x} Pushed to GitHub. Dashboard: ${siteUrl}/dashboard/ ${c.d}(Pages takes about a minute)${c.x}`
-    : `${c.y}Push skipped: ${pushed.stderr.trim().split("\n").pop()}${c.x}`);
+    : `${c.y}Not pushed to GitHub: ${(pushed.stderr || pushed.stdout || pushed.error?.message || "unknown error").trim().split("\n").pop()}${c.x}`);
 }
 
 const failures = rows.filter((r) => r.status !== "Success").length;
