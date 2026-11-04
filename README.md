@@ -30,6 +30,9 @@ The agents use each kit's `ROLE.md` as their charter and record each run in the 
 5. Code checks each agent's exit status and output file, then the Project Manager reads the work and writes `daily-brief.md`.
 6. [agency/bridge/bridge.mjs](agency/bridge/bridge.mjs) posts one row per agent and the brief to [the Apps Script web app](agency/bridge/Code.template.gs).
 7. The script emails the bulletin. A time trigger also sends it at 8:00 AM, including an alert if no agent ran in the last 24 hours.
+8. [agency/tools/dashboard.mjs](agency/tools/dashboard.mjs) rebuilds the [results dashboard](https://adwaith11366.github.io/rankrelay/dashboard/) and the run is pushed to GitHub.
+
+Submission files are in [submission/](submission/SUBMISSION.md).
 
 Agents can write only inside their run folder under `outputs/`. Nothing is sent, posted or published by an agent; outreach stays as drafts.
 
