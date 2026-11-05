@@ -1,0 +1,16 @@
+# Shoestring Atlas
+
+> Budget travel guides on packing light, finding cheap flights, and eating and sleeping well for less.
+
+## Guides
+
+- [How to pack for two weeks in one carry-on bag](https://adwaith11366.github.io/rankrelay/how-to-pack-carry-on-only.html): A two-week packing list that fits one carry-on bag, with what to leave at home and how to do laundry on the road.
+- [When to book cheap flights](https://adwaith11366.github.io/rankrelay/cheap-flights-timing.html): When to book flights for lower fares, how flexible dates help, and why the cheapest fare is not always the best one.
+- [Hostel or guesthouse: which is cheaper for solo travellers?](https://adwaith11366.github.io/rankrelay/hostel-vs-guesthouse.html): When a hostel wins and when a guesthouse wins.
+- [Eat well on ten dollars a day](https://adwaith11366.github.io/rankrelay/eat-on-a-budget.html): How to eat well for ten dollars a day while travelling: markets, lunch menus and hostel kitchens.
+- [Visa basics](https://adwaith11366.github.io/rankrelay/visa-free-basics.html): Visa basics.
+
+## Site
+
+- [Home](https://adwaith11366.github.io/rankrelay/): Latest guides and where a small budget can take you.
+- [About](https://adwaith11366.github.io/rankrelay/about.html): About Shoestring Atlas.

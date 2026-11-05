@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is travel insurance worth it for a short or cheap trip?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually, yes, for the medical part. A short trip can still end in a hospital, and the bill doesn't shrink because the trip was cheap. If your card or health plan already covers care abroad, you can skip duplicate cover and buy only what's missing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does my credit card already include travel insurance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Some do, and some only apply if you paid for the trip with that card. Terms vary by bank and by card tier. Ask your card provider for the written terms and check the medical limit, the trip length covered and the exclusions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the cheapest way to get decent cover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Check what you already hold first, then compare standalone policies on payout limits and excess rather than price alone. Drop add-ons you won't use, but don't drop medical cover. We haven't compared specific insurers, so we don't name one here."
+      }
+    }
+  ]
+}
